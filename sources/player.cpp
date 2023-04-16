@@ -5,11 +5,13 @@ using namespace std;
 Player::Player(string name)
 {
     this->name = name;
+    this->cards_taken = 0;
+    this->playing = false;
 }
 
 int Player::stacksize()
 {
-    return cards.size();
+    return cardsInDeck.size();
 }
 
 int Player::cardesTaken()
@@ -20,27 +22,56 @@ int Player::cardesTaken()
 ///////
 void Player::add_card(Card card)
 {
-    cards.push_back(card);
+    cardsInDeck.push_back(card);
 }
 
 bool Player::is_empty() const
 {
-    return cards.empty();
+    return cardsInDeck.empty();
 }
 
 int Player::cards_in_deck()
 {
-    return cards.size;
+    return cardsInDeck.size;
 }
 
-void Player::win()
+void Player::add_points(int points)
 {
-    this->cards_taken++;
+    for (int i = 0; i < points; i++)
+    {
+        this->cards_taken++;
+    }
 }
 
 Card Player::pop_back_card()
 {
-    Card card = cards.back();
-    cards.pop_back();
+    Card card = cardsInDeck.back();
+    this->cardsTaken_vec.push_back(card);
+    cardsInDeck.pop_back();
     return card;
+}
+
+void Player::pop_hidden_card()
+{
+    this->cardsInDeck.pop_back();
+}
+
+bool Player::get_playing() const
+{
+    return this->playing;
+}
+
+void Player::set_playing(bool flag)
+{
+    this->playing = flag;
+}
+
+string Player::get_name()
+{
+    return this->name;
+}
+
+vector<Card> &Player::get_cardsTaken_vec()
+{
+    return this->cardsTaken_vec;
 }

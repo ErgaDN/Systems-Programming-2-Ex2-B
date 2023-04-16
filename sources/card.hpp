@@ -44,11 +44,11 @@ private:
 
 public:
     Card(Value v, Suit s) : value(v), suit(s) {}
-    int getSuit()
+    Suit getSuit()
     {
         return this->suit;
     }
-    int getValue ()
+    Value getValue ()
     {
         return this->value;
     }

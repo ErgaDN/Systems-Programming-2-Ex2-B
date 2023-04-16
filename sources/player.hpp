@@ -14,24 +14,25 @@ using namespace std;
 class Player
 {
     string name;
-    vector<Card> cards;
+    vector<Card> cardsInDeck;
+    vector<Card> cardsTaken_vec;
     int cards_taken;
+    bool playing;
 
 public:
-    Player() {}
-    Player(string name)
-    {
-        this->name = name;
-        this->cards_taken = 0;
-    }
-    
+    Player(string name);
     int stacksize();
     int cardesTaken();
 
     ////
     void add_card(Card card);
-    bool is_empty() const;
+    bool is_empty() const; // returns 1 (true) if cardsInDeck is empty
     int cards_in_deck();
-    void win();
+    void add_points(int points);
     Card Player::pop_back_card();
+    void pop_hidden_card();
+    bool get_playing() const;
+    void set_playing(bool flag);
+    string get_name();
+    vector<Card>& get_cardsTaken_vec();
 };

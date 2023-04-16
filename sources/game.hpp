@@ -12,8 +12,8 @@ using namespace std;
 
 enum Winner
 {
-    LEFT,
-    RIGHT,
+    LEFT_P, // Player_1
+    RIGHT_P, // Player_2
     DRAW
 };
 
@@ -22,10 +22,14 @@ class Game
     Player p1;
     Player p2;
     Deck deck;
+    vector<Winner> winTurn;
+    bool gameRunning;
+    int rounds;
+    int drawCount;
 
 public:
     // Game() {}
-    Game(Player p1, Player p2);
+    Game(Player &p1, Player &p2);
     void playTurn();
     void printLastTurn();
     void playAll();
@@ -33,5 +37,9 @@ public:
     void printLog();
     void printStats();
     //
-    Winner winner(Card c1, Card c2);
+    Winner winner_single_turn(Card c1, Card c2);
+    // void add_winner(Winner winner);
+    bool enough_cards(const Player& p1, const Player& p2);
+    int num_of_draw();
+    void print_one_turn(int index);
 };
