@@ -22,33 +22,43 @@ enum Suit
 enum Value
 {
     ACE = 1,
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    SIX,
-    SEVEN,
-    EIGHT,
-    NINE,
-    TEN,
-    JACK,
-    QUEEN,
-    KING
+    // TWO,
+    // THREE,
+    // FOUR,
+    // FIVE,
+    // SIX,
+    // SEVEN,
+    // EIGHT,
+    // NINE,
+    // TEN,
+    JACK = 11,
+    QUEEN = 12,
+    KING = 13
 };
 
 class Card
 {
 private:
     Suit suit;
-    Value value;
+    string value;
+    int num;
 
 public:
-    Card(Value v, Suit s) : value(v), suit(s) {}
-    Suit getSuit()
+    Card(Suit suit, int num) {
+        string valStr[] = {"Ace","2","3","4","5","6","7","8","9" ,"10","Jack","Queen","King"};
+        if (num < 1 || num > 13)
+        {
+            throw logic_error("Invalid entry");
+        }
+        this->suit = suit;
+        this->num = num;
+        this->value = valStr[num-1];
+    }
+    Suit getSuit() const
     {
         return this->suit;
     }
-    Value getValue ()
+    Value getValue () const
     {
         return this->value;
     }

@@ -17,6 +17,7 @@ class Player
     vector<Card> cardsInDeck;
     vector<Card> cardsTaken_vec;
     int cards_taken;
+    int winCount;
     bool playing;
 
 public:
@@ -29,10 +30,12 @@ public:
     bool is_empty() const; // returns 1 (true) if cardsInDeck is empty
     int cards_in_deck();
     void add_points(int points);
-    Card Player::pop_back_card();
+    Card pop_back_card();
     void pop_hidden_card();
     bool get_playing() const;
     void set_playing(bool flag);
-    string get_name();
+    string get_name() const;
     vector<Card>& get_cardsTaken_vec();
+    int get_winCount() const;
+
 };

@@ -37,7 +37,7 @@ public:
     void printLog();
     void printStats();
     //
-    Winner winner_single_turn(Card c1, Card c2);
+    Winner winner_single_turn(const Card& left, const Card& right);
     // void add_winner(Winner winner);
     bool enough_cards(const Player& p1, const Player& p2);
     int num_of_draw();

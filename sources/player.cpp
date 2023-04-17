@@ -6,6 +6,7 @@ Player::Player(string name)
 {
     this->name = name;
     this->cards_taken = 0;
+    this->winCount = 0;
     this->playing = false;
 }
 
@@ -32,15 +33,12 @@ bool Player::is_empty() const
 
 int Player::cards_in_deck()
 {
-    return cardsInDeck.size;
+    return cardsInDeck.size();
 }
 
 void Player::add_points(int points)
 {
-    for (int i = 0; i < points; i++)
-    {
-        this->cards_taken++;
-    }
+    cards_taken += points;
 }
 
 Card Player::pop_back_card()
@@ -66,7 +64,7 @@ void Player::set_playing(bool flag)
     this->playing = flag;
 }
 
-string Player::get_name()
+string Player::get_name() const
 {
     return this->name;
 }
@@ -74,4 +72,9 @@ string Player::get_name()
 vector<Card> &Player::get_cardsTaken_vec()
 {
     return this->cardsTaken_vec;
+}
+
+int Player::get_winCount() const
+{
+    return this->winCount;
 }

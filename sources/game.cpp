@@ -45,11 +45,29 @@ Game::Game(Player &p1, Player &p2) : p1(p1), p2(p2)
 
 void Game::playTurn()
 {
+    if (!this->gameRunning)
+    {
+        throw runtime_error("Game is already over");
+    }
+
+    if (&p1 == &p2)
+    {
+        throw runtime_error("Only one player");
+    }
+
     this->gameRunning = enough_cards(p1, p2);
     int points = 0;
     while (gameRunning)
     {
-        Winner state = winner_single_turn(p1.pop_back_card(), p2.pop_back_card());
+        if (p1.is_empty() || p2.is_empty())
+        {
+            break;
+        }
+
+        Card left_card = p1.pop_back_card();
+        Card right_card = p2.pop_back_card();
+
+        Winner state = winner_single_turn(left_card, right_card);
         this->winTurn.push_back(state);
         points++;
         /*
@@ -86,7 +104,7 @@ bool Game::enough_cards(const Player &p1, const Player &p2)
     return true;
 }
 
-Winner Game::winner_single_turn(Card left, Card right)
+Winner Game::winner_single_turn(const Card &left, const Card &right)
 {
     // A draw between the players
     if (left.getValue() == right.getValue())
@@ -142,7 +160,7 @@ void Game::printLastTurn()
         print_one_turn(index);
         index++;
         numOfDraws--;
-        cout << "DRAW. "
+        cout << "DRAW. ";
     }
     print_one_turn(winTurn.size() - 1);
     if (this->winTurn.back() == LEFT_P)
@@ -208,7 +226,8 @@ void Game::printWiner()
         {
             cout << p2.get_name() << endl;
         }
-        else {
+        else
+        {
             cout << "Draw." << endl;
         }
     }
@@ -241,4 +260,12 @@ void Game::printLog()
 
 void Game::printStats()
 {
+    cout << "amount of draws: " << to_string(drawCount) << endl;
+
+    float pre = (drawCount / rounds * 100);
+    cout << " of draws: " << to_string(pre) << "%" << endl;
+    cout << this->p1.get_name() << " won " << this->p1.cardesTaken() << endl; // prints the amount of cards this player has won.
+    cout << this->p2.get_name() << " won " << this->p2.cardesTaken() << endl;
+    cout << this->p1.get_name() << " won " << this->p1.get_winCount() << " timse " << endl;
+    cout << this->p2.get_name() << " won " << this->p2.get_winCount() << " timse " << endl;
 }
