@@ -49,29 +49,13 @@ string Card::cardString() const
     return getValStr() + " of " + getSuit() + ". ";
 }
 
-// vector<Card> initionalDeck()
-// {
-//     vector<Card> deck;
-//     for (int i = 1; i < 14; i++)
-//     {
-//         deck.push_back(Card(HEARTS, i));
-//         deck.push_back(Card(CLUBS, i));
-//         deck.push_back(Card(SPADES, i));
-//         deck.push_back(Card(DIAMONDS, i));
-//     }
-//     return deck;
-// }
-
-// void Card::shuffle(const vector<Card>& deck)
-// {
-//     random_device rd;
-//     mt19937 g(rd());
-//     shuffle(deck.begin(), deck.end(), g);
-// }
-
-// void Card::shuffle(const vector<Card>& deck)
-// {
-//     random_device rd;
-//     mt19937 gen(rd());
-//     shuffle(deck.begin(), deck.end(), gen);
-// }
+Deck::Deck()
+    {
+        for (int i = 1; i < 14 ; i++)
+        {
+            deck.push_back(Card(HEARTS, i));
+            deck.push_back(Card(CLUBS, i));
+            deck.push_back(Card(SPADES, i));
+            deck.push_back(Card(DIAMONDS, i));
+        }
+    }

@@ -45,7 +45,7 @@ namespace ariel
             
             
             
-            std::vector<Card> &get_cardsTaken_vec();
-            int get_winCount() const;
+            // std::vector<Card> &get_cardsTaken_vec();
+            // int get_winCount() const;
     };
 }

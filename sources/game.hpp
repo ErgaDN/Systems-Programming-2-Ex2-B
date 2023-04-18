@@ -20,8 +20,8 @@ enum Winner
 class Game
 {
 private:
-    Player& p1;
-    Player& p2;
+    Player& player_1;
+    Player& player_2;
 
     string lastTurn;
     string gameDoc;
@@ -35,7 +35,7 @@ private:
 
 public:
     // Game() {}
-    Game(Player &p1, Player &p2);
+    Game(Player &player_1, Player &player_2);
     void playTurn();
     void printLastTurn();
     void playAll();
@@ -52,10 +52,10 @@ public:
 
 
     //
-    Winner winner_single_turn(const Card& left, const Card& right);
-    // void add_winner(Winner winner);
+    // Winner winner_single_turn(const Card& left, const Card& right);
+    // // void add_winner(Winner winner);
     
-    int num_of_draw();
-    void print_one_turn(int index);
+    // int num_of_draw();
+    // void print_one_turn(int index);
 };
 

@@ -48,22 +48,13 @@ private:
     vector<Card> deck;
 
 public:
-    Deck()
-    {
-        for (int i = 1; i < 14; i++)
-        {
-            deck.push_back(Card(HEARTS, i));
-            deck.push_back(Card(CLUBS, i));
-            deck.push_back(Card(SPADES, i));
-            deck.push_back(Card(DIAMONDS, i));
-        }
-    }
+    Deck();
 
     void shuffle()
     {
-        random_device rd;
-        mt19937 g(rd());
-        std::shuffle(deck.begin(), deck.end(), g);
+        random_device rdd;
+        mt19937 ggg(rdd());
+        std::shuffle(deck.begin(), deck.end(), ggg);
     }
 
     Card deal()
@@ -78,15 +69,4 @@ public:
         return deck.empty();
     }
 
-    // void printDeck()
-    // {
-    //     for (int i = 0 ; i < deck.size() ; i++)
-    //     {
-    //         // Card card = deck[i];
-    //         Card card = this->deck[static_cast<vector<Card>::size_type>(i)];
-    //         card.cardString();
-    //         cout << endl;
-
-    //     }
-    // }
 };
