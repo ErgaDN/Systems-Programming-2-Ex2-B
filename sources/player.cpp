@@ -20,7 +20,7 @@ int Player::cardesTaken() const
     return points;
 }
 
-///////
+
 string Player::get_name() const
 {
     return this->name;
@@ -70,37 +70,3 @@ void Player::throw_card()
 {
     this->cardsInDeck.pop_back();
 }
-
-
-
-
-
-
-
-
-//////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// vector<Card> &Player::get_cardsTaken_vec()
-// {
-//     return this->cardsTaken_vec;
-// }
-
-// int Player::get_winCount() const
-// {
-//     return this->winCount;
-// }

@@ -29,12 +29,7 @@ private:
     int rounds;
     int drawCount;
 
-    // Deck deck;
-    // vector<Winner> winTurn;
-    // vector<string> gameStr;    
-
 public:
-    // Game() {}
     Game(Player &player_1, Player &player_2);
     void playTurn();
     void printLastTurn();
@@ -42,20 +37,8 @@ public:
     void printWiner();
     void printLog();
     void printStats();
-    //
-    // void initionalDeck(vector<Card>& deck);
-    // void shuffle(vector<Card>& deck);
+   
     Winner check_win(const Card& card_p1, const Card& card_p2);
     bool deck_over() const;
-    
-
-
-
-    //
-    // Winner winner_single_turn(const Card& left, const Card& right);
-    // // void add_winner(Winner winner);
-    
-    // int num_of_draw();
-    // void print_one_turn(int index);
 };
 
