@@ -45,7 +45,7 @@ public:
     //
     // void initionalDeck(vector<Card>& deck);
     // void shuffle(vector<Card>& deck);
-    Winner chack_win(const Card& card_p1, const Card& card_p2);
+    Winner check_win(const Card& card_p1, const Card& card_p2);
     bool deck_over() const;
     
 

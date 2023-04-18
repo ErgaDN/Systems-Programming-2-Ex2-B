@@ -29,66 +29,71 @@ Game::Game(Player &p1, Player &p2) : p1(p1), p2(p2)
 
 void Game::playTurn()
 {
-    if (rounds > 26 || rounds < 0 || !running || deck_over())
+    if (!running)
     {
-        throw runtime_error("Game not running");
+        return;
+    }
+    if (rounds > 26 || rounds < 0 || deck_over())
+    {
+        throw logic_error("Game not running");
     }
     if (&p1 == &p2)
     {
-        throw runtime_error("Only one player");
+        throw logic_error("Only one player");
     }
 
     int points = 0;
     int drawForTurn = 0;
     rounds++;
-    if (running)
-    {
-        lastTurn = "";
-    }
+    lastTurn = "";
     while (running) 
     {
-        // Card card_p1 = p1.pop_card();
-        // Card card_p1 = p1.back_card();
-        // Card card_p2 = p2.back_card();
+        Card card_p1 = p1.back_card();
+        Card card_p2 = p2.back_card();
         p1.pop_card();
         p2.pop_card();
-        // points++;
-        // lastTurn += p1.get_name() + " played " + card_p1.cardString() + p2.get_name() + " played " + card_p2.cardString();
-        // Winner state = chack_win(card_p1, card_p2);
-    //     if (state == DRAW)
-    //     {
-    //         lastTurn += "Draw. ";
-    //         drawForTurn++;
-    //         if (deck_over())
-    //         {
-    //             p1.add_points(1);
-    //             p2.add_points(1);
-    //             running = false;
-    //             gameDoc += lastTurn;
-    //             break;
-    //         }
-    //         p1.throw_card();
-    //         p2.throw_card();
-    //         points++;
-    //         running = !deck_over();
-    //     }
-    //     else if (state == LEFT_P)
-    //     {
-    //         lastTurn += p1.get_name() + " wins. \n";
-    //         p1.add_points(2*points);
-    //     }
-    //     else if (state == RIGHT_P)
-    //     {
-    //         lastTurn += p2.get_name() + " wins. \n";
-    //         p2.add_points(2*points);
-    //     }
+        
+        points++;
+        lastTurn += p1.get_name() + " played " + card_p1.cardString() + p2.get_name() + " played " + card_p2.cardString();
+        Winner state = check_win(card_p1, card_p2);
+        
+        if (state == DRAW)
+        {
+            lastTurn += "Draw. ";
+            drawForTurn++;
+            if (deck_over())
+            {
+                p1.add_points(1);
+                p2.add_points(1);
+                running = false;
+                gameDoc += lastTurn;
+                break;
+            }
+            p1.throw_card();
+            p2.throw_card();
+            points++;
+            running = !deck_over();
+        }
+        else if (state == LEFT_P)
+        {
+            lastTurn += p1.get_name() + " wins. \n";
+            p1.add_points(2*points);
+            break;
+        }
+        else if (state == RIGHT_P)
+        {
+            lastTurn += p2.get_name() + " wins. \n";
+            p2.add_points(2*points);
+            break;
+        }
         
     }
+    running = !deck_over();
     gameDoc += lastTurn;
     drawCount += drawForTurn;
 }
 
-Winner Game::chack_win(const Card& card_p1, const Card& card_p2)
+Winner Game::check_win(const Card& card_p1, const Card& card_p2)
 {
     if (card_p1.getValInt() > card_p2.getValInt())
     {
@@ -115,9 +120,43 @@ bool Game::deck_over() const
     return false;
 }
 
+void Game::playAll()
+{
+    while (running)
+    {
+        playTurn();
+    }
+}
+
+void Game::printWiner()
+{
+    if (p1.cardesTaken() > p2.cardesTaken())
+    {
+        cout << "Winner: " + p1.get_name()<< endl;
+    }
+    else if (p1.cardesTaken() < p2.cardesTaken())
+    {
+        cout << "Winner: " + p2.get_name() << endl;
+    }
+    else
+    {
+        cout << "Draw!" << endl;
+    }
+}
+
 void Game::printLastTurn()
 {
     cout << lastTurn << endl;
+}
+
+void Game::printLog()
+{
+    cout << gameDoc << endl;
+}
+
+void Game::printStats()
+{
+    
 }
 
 
@@ -278,13 +317,7 @@ void Game::printLastTurn()
 //     }
 // }
 
-// void Game::playAll()
-// {
-//     while (gameRunning)
-//     {
-//         playTurn();
-//     }
-// }
+
 
 // void Game::printWiner()
 // {
