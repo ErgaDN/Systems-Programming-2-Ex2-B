@@ -1,41 +1,51 @@
 #pragma once
-#include <iostream>
 #include <string>
-#include "stdio.h"
 #include <vector>
 #include "card.hpp"
 
 namespace ariel
 {
+    class Player
+    {
+        private:
+            std::string name;
+            vector<Card> cardsInDeck;
+            int points;
+            bool inGame;
+
+            // vector<Card> cardsTaken_vec;
+            // int winCount;
+
+        public:
+            Player(string name);
+            int stacksize() const;
+            int cardesTaken() const;
+
+            ////
+            std::string get_name() const;
+            bool get_inGame() const;
+            void set_inGame(bool flag);
+            void add_card(Card card);
+            int cardsInDeck_size() const;
+            bool deck_empty() const;
+            void pop_card();
+            void add_points(int points);
+            void throw_card();
+            const Card& back_card() const;
+            
+
+
+
+
+            ////
+            
+            // int cards_in_deck();
+            
+            
+            
+            
+            
+            std::vector<Card> &get_cardsTaken_vec();
+            int get_winCount() const;
+    };
 }
-using namespace ariel;
-using namespace std;
-
-class Player
-{
-    string name;
-    vector<Card> cardsInDeck;
-    vector<Card> cardsTaken_vec;
-    int cards_taken;
-    int winCount;
-    bool playing;
-
-public:
-    Player(string name);
-    int stacksize();
-    int cardesTaken();
-
-    ////
-    void add_card(Card card);
-    bool is_empty() const; // returns 1 (true) if cardsInDeck is empty
-    int cards_in_deck();
-    void add_points(int points);
-    Card pop_back_card();
-    void pop_hidden_card();
-    bool get_playing() const;
-    void set_playing(bool flag);
-    string get_name() const;
-    vector<Card>& get_cardsTaken_vec();
-    int get_winCount() const;
-
-};

@@ -19,13 +19,19 @@ enum Winner
 
 class Game
 {
-    Player p1;
-    Player p2;
-    Deck deck;
-    vector<Winner> winTurn;
-    bool gameRunning;
+private:
+    Player& p1;
+    Player& p2;
+
+    string lastTurn;
+    string gameDoc;
+    bool running;
     int rounds;
     int drawCount;
+
+    // Deck deck;
+    // vector<Winner> winTurn;
+    // vector<string> gameStr;    
 
 public:
     // Game() {}
@@ -37,9 +43,19 @@ public:
     void printLog();
     void printStats();
     //
+    // void initionalDeck(vector<Card>& deck);
+    // void shuffle(vector<Card>& deck);
+    Winner chack_win(const Card& card_p1, const Card& card_p2);
+    bool deck_over() const;
+    
+
+
+
+    //
     Winner winner_single_turn(const Card& left, const Card& right);
     // void add_winner(Winner winner);
-    bool enough_cards(const Player& p1, const Player& p2);
+    
     int num_of_draw();
     void print_one_turn(int index);
 };
+

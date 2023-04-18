@@ -5,76 +5,102 @@ using namespace std;
 Player::Player(string name)
 {
     this->name = name;
-    this->cards_taken = 0;
-    this->winCount = 0;
-    this->playing = false;
+    this->points = 0;
+    // this->winCount = 0;
+    this->inGame = false;
 }
 
-int Player::stacksize()
+int Player::stacksize() const
 {
-    return cardsInDeck.size();
+    return (int)cardsInDeck.size();
 }
 
-int Player::cardesTaken()
+int Player::cardesTaken() const
 {
-    return cards_taken;
+    return points;
 }
 
 ///////
-void Player::add_card(Card card)
-{
-    cardsInDeck.push_back(card);
-}
-
-bool Player::is_empty() const
-{
-    return cardsInDeck.empty();
-}
-
-int Player::cards_in_deck()
-{
-    return cardsInDeck.size();
-}
-
-void Player::add_points(int points)
-{
-    cards_taken += points;
-}
-
-Card Player::pop_back_card()
-{
-    Card card = cardsInDeck.back();
-    this->cardsTaken_vec.push_back(card);
-    cardsInDeck.pop_back();
-    return card;
-}
-
-void Player::pop_hidden_card()
-{
-    this->cardsInDeck.pop_back();
-}
-
-bool Player::get_playing() const
-{
-    return this->playing;
-}
-
-void Player::set_playing(bool flag)
-{
-    this->playing = flag;
-}
-
 string Player::get_name() const
 {
     return this->name;
 }
 
-vector<Card> &Player::get_cardsTaken_vec()
+bool Player::get_inGame() const
 {
-    return this->cardsTaken_vec;
+    return this->inGame;
 }
 
-int Player::get_winCount() const
+void Player::set_inGame(bool flag)
 {
-    return this->winCount;
+    this->inGame = flag;
 }
+
+void Player::add_card(Card card)
+{
+    cardsInDeck.push_back(card);
+}
+
+int Player::cardsInDeck_size() const
+{
+    return (int)cardsInDeck.size();
+}
+
+bool Player::deck_empty() const
+{
+    return cardsInDeck.empty();
+}
+
+const Card& Player::back_card() const
+{ 
+    return this->cardsInDeck.back();
+}
+
+void Player::pop_card()
+{
+    cardsInDeck.pop_back();
+}
+
+void Player::add_points(int num)
+{
+    this->points += num;
+}
+
+void Player::throw_card()
+{
+    this->cardsInDeck.pop_back();
+}
+
+
+
+
+
+
+
+
+//////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// vector<Card> &Player::get_cardsTaken_vec()
+// {
+//     return this->cardsTaken_vec;
+// }
+
+// int Player::get_winCount() const
+// {
+//     return this->winCount;
+// }
