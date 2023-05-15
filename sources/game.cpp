@@ -3,6 +3,7 @@
 #include "iostream"
 #include "stdio.h"
 using namespace std;
+using namespace ariel;
 
 Game::Game(Player &p1, Player &p2) : player_1(p1), player_2(p2)
 {
@@ -45,17 +46,17 @@ void Game::playTurn()
     int drawForTurn = 0;
     rounds++;
     lastTurn = "";
-    while (running) 
+    while (running)
     {
         Card card_p1 = player_1.back_card();
         Card card_p2 = player_2.back_card();
         player_1.pop_card();
         player_2.pop_card();
-        
+
         points++;
         lastTurn += player_1.get_name() + " played " + card_p1.cardString() + player_2.get_name() + " played " + card_p2.cardString();
         Winner state = check_win(card_p1, card_p2);
-        
+
         if (state == DRAW)
         {
             lastTurn += "Draw. ";
@@ -76,22 +77,22 @@ void Game::playTurn()
         else if (state == LEFT_P)
         {
             lastTurn += player_1.get_name() + " wins. \n";
-            player_1.add_points(2*points);
+            player_1.add_points(points);
             break;
         }
         else if (state == RIGHT_P)
         {
             lastTurn += player_2.get_name() + " wins. \n";
-            player_2.add_points(2*points);
+            player_2.add_points(points);
             break;
-        }   
+        }
     }
     running = !deck_over();
     gameDoc += lastTurn;
     drawCount += drawForTurn;
 }
 
-Winner Game::check_win(const Card& card_p1, const Card& card_p2)
+Winner Game::check_win(const Card &card_p1, const Card &card_p2)
 {
     if (card_p1.getValInt() > card_p2.getValInt())
     {
@@ -132,9 +133,10 @@ void Game::printWiner()
     {
         return;
     }
+
     if (player_1.cardesTaken() > player_2.cardesTaken())
     {
-        cout << "Winner: " + player_1.get_name()<< endl;
+        cout << "Winner: " + player_1.get_name() << endl;
     }
     else if (player_1.cardesTaken() < player_2.cardesTaken())
     {
@@ -161,11 +163,17 @@ void Game::printStats()
     cout << "Player " << player_1.get_name() << " status:" << endl;
     cout << "Cards won: " << player_1.cardesTaken() << endl;
     cout << "Cards left: " << player_1.stacksize() << endl;
-    cout << "Win rate: " << (double)(player_1.cardesTaken() / rounds * 100) << "%" << endl << endl;
+    cout << "Win rate: " << ((float)player_1.cardesTaken() / rounds)*100 << "%" << endl
+         << endl;
 
     cout << "Player " << player_2.get_name() << " status:" << endl;
     cout << "Cards won: " << player_2.cardesTaken() << endl;
     cout << "Cards left: " << player_2.stacksize() << endl;
-    cout << "Win rate: " << (double)(player_2.cardesTaken() / rounds * 100) << "%" << endl << endl;
-}
+    cout << "Win rate: " << ((float)player_2.cardesTaken() / rounds)*100 << "%" << endl
+         << endl;
 
+    cout << "Total turns: " << this->rounds << endl;
+    cout << "Total draws: " << this->drawCount << endl;
+    cout << "Draw rate: " << ((float)this->drawCount / this->rounds)*100 << "%" << endl
+         << endl;  
+}

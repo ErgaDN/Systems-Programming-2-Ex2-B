@@ -50,12 +50,12 @@ string Card::cardString() const
 }
 
 Deck::Deck()
+{
+    for (int i = 1; i < 14; i++)
     {
-        for (int i = 1; i < 14 ; i++)
-        {
-            deck.push_back(Card(HEARTS, i));
-            deck.push_back(Card(CLUBS, i));
-            deck.push_back(Card(SPADES, i));
-            deck.push_back(Card(DIAMONDS, i));
-        }
+        deck.push_back(Card(HEARTS, i));
+        deck.push_back(Card(CLUBS, i));
+        deck.push_back(Card(SPADES, i));
+        deck.push_back(Card(DIAMONDS, i));
     }
+}

@@ -1,12 +1,12 @@
 #include "player.hpp"
 #include <string>
 using namespace std;
+using namespace ariel;
 
 Player::Player(string name)
 {
     this->name = name;
     this->points = 0;
-    // this->winCount = 0;
     this->inGame = false;
 }
 
@@ -19,7 +19,6 @@ int Player::cardesTaken() const
 {
     return points;
 }
-
 
 string Player::get_name() const
 {
@@ -51,8 +50,8 @@ bool Player::deck_empty() const
     return cardsInDeck.empty();
 }
 
-const Card& Player::back_card() const
-{ 
+const Card &Player::back_card() const
+{
     return this->cardsInDeck.back();
 }
 
